@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 
 import mongoose from "mongoose";
 
+import Module from "./models/module.js";
+
 import { registerValidation } from "./validations/auth.js";
 import { loginValidation } from "./validations/login.js";
 
