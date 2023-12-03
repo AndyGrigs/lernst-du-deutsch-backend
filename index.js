@@ -25,15 +25,64 @@ mongoose
 
 const app = express();
 
-
 app.use(express.json());
 app.use(cors());
 
-// Роут для створення нового модуля
+// // Роут для створення нового модуля
+// app.post("/modules", async (req, res) => {
+//   try {
+//     const newModule = await Module.create(req.body);
+//     res.json(newModule);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: "Internal Server Error" });
+//   }
+// });
+
+// app.post("/modules", async (req, res) => {
+//   try {
+//     // Convert strings to ObjectId
+//     const moduleGrammarIds = req.body.moduleGrammar.map((id) =>
+//       mongoose.Types.ObjectId(id)
+//     );
+//     const exercisesIds = req.body.exercises.map((id) =>
+//       mongoose.Types.ObjectId(id)
+//     );
+
+// Replace the string IDs with ObjectId
+
+app.all("/test", (req, res) => {
+  // console.log(req.query);
+  // console.log(req.query.name);
+  // res.send(req.query);
+  // console.log(req.params);
+  // res.send(req.params);
+  console.log(req.body);
+  res.send(req.body);
+});
+
 app.post("/modules", async (req, res) => {
   try {
-    const newModule = await Module.create(req.body);
-    res.json(newModule);
+    console.log(req.body);
+    const moduleData = new Module({
+      name: req.body.name,
+      moduleGrammar: req.body.moduleGrammar,
+      videos: req.body.videos,
+      text: {
+        title: req.body.text.title,
+        content: req.body.text.content,
+      },
+      vocabulary: req.body.vocabulary,
+      exercises: req.body.exercises,
+    });
+
+    moduleData
+      .save()
+      .then((result) => {
+        console.log(result);
+        res.send(result);
+      })
+      .catch((err) => console.log(err));
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
