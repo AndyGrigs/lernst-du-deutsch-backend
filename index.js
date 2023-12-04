@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 
 import mongoose from "mongoose";
 
-import Module from "./models/module.js";
 import {
   createModule,
   deleteOneModule,
@@ -12,6 +11,15 @@ import {
   getOneModule,
   updateOneModule,
 } from "./controllers/moduleController.js";
+
+import {
+  createExercise,
+  deleteOneExercise,
+  getExercises,
+  getOneExercise,
+  updateOneExercise,
+  getExercisesByModule,
+} from "./controllers/exerciseController.js";
 
 import { registerValidation } from "./validations/auth.js";
 import { loginValidation } from "./validations/login.js";
@@ -45,6 +53,17 @@ app.get("/modules/:moduleId", getOneModule);
 app.put("/modules/:moduleId", updateOneModule);
 // Роут для видалення модуля за його ідентифікатором
 app.delete("/modules/:moduleId", deleteOneModule);
+
+// New route for exercises related to a specific module
+app.get("/modules/:moduleId/exercises", getExercisesByModule);
+
+// Routes for exercises
+app.post("/exercises", createExercise);
+app.get("/exercises", getExercises);
+app.get("/exercises/:exerciseId", getOneExercise);
+app.put("/exercises/:exerciseId", updateOneExercise);
+app.delete("/exercises/:exerciseId", deleteOneExercise);
+
 
 app.post("/auth/login", loginValidation, handleValidationErrors, login);
 app.post(
