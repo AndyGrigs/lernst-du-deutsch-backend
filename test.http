@@ -1,2 +1,9 @@
 
+post http://localhost:4444/modules/656c33a76703257fb1ee14dd/exercises
+Content-Type: application/json
+
+
+
+
+###
 get http://localhost:4444/modules

@@ -1,18 +1,5 @@
 import Exercise from "../models/exercise.js";
 
-
-export const createExercise = async (req, res) => {
-  try {
-    const exerciseData = new Exercise(req.body);
-    const result = await exerciseData.save();
-    res.send(result);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
-
-
 export const getExercises = async (req, res) => {
   try {
     const exercises = await Exercise.find();
@@ -22,7 +9,20 @@ export const getExercises = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+import mongoose from "mongoose";
+import ExerciseModel from "../models/exercise.js";
 
+export const createExercise = async (req, res) => {
+  try {
+    const moduleId = mongoose.Types.ObjectId(req.params.moduleId); // Convert to ObjectId
+    const exerciseData = new ExerciseModel({ moduleId, ...req.body });
+    const result = await exerciseData.save();
+    res.send(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 
 export const getOneExercise = async (req, res) => {
   try {
@@ -36,7 +36,6 @@ export const getOneExercise = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
 
 export const updateOneExercise = async (req, res) => {
   try {
@@ -55,10 +54,11 @@ export const updateOneExercise = async (req, res) => {
   }
 };
 
-
 export const deleteOneExercise = async (req, res) => {
   try {
-    const deletedExercise = await ExerciseModel.findByIdAndDelete(req.params.exerciseId);
+    const deletedExercise = await ExerciseModel.findByIdAndDelete(
+      req.params.exerciseId
+    );
     if (!deletedExercise) {
       return res.status(404).json({ error: "Exercise not found" });
     }
@@ -68,7 +68,6 @@ export const deleteOneExercise = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
 
 export const getExercisesByModule = async (req, res) => {
   try {
@@ -80,7 +79,3 @@ export const getExercisesByModule = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
-
-
-
