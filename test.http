@@ -1,9 +1,24 @@
 
-post http://localhost:4444/modules/656c33a76703257fb1ee14dd/exercises
+post http://localhost:4444/exercises
 Content-Type: application/json
+
+{
+  "instruction": " numbers",
+  "tasks": [
+    {
+      "content": "I love you",
+      "solution": "hello"
+    },
+    {
+      "content": "Call e numbers 5 and 7",
+      "solution": "s7);"
+    }
+  ]
+}
 
 
 
 
 ###
 get http://localhost:4444/modules
+
