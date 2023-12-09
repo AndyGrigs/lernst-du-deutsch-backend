@@ -2,23 +2,70 @@
 post http://localhost:4444/exercises
 Content-Type: application/json
 
+
 {
-  "instruction": " numbers",
+  "number": "2.12",
+  "instruction": "Заповніть пропуски відповідною формою дієслова sein:",
   "tasks": [
     {
-      "content": "I love you",
-      "solution": "hello"
+      "content": "Wir {input} Sportler.",
+      "solution": ["sind"]
     },
     {
-      "content": "Call e numbers 5 and 7",
-      "solution": "s7);"
+      "content": "Sie {input} Lehrer.",
+      "solution": ["sind", "ist"]
+    },
+    {
+      "content": "Du {input} Designer.",
+      "solution": ["bist"]
+    },
+    {
+      "content": "Ihr {input} Programmierer.",
+      "solution": ["seid"]
+    },
+    {
+      "content": "Er {input} Manager.",
+      "solution": ["ist"]
+    },
+    {
+      "content": "Sie {input} Arbeiter.",
+      "solution": ["sind", "ist"]
+    },
+    {
+      "content": "Ihr {input} Sportler.",
+      "solution": ["seid"]
+    },
+    {
+      "content": "Wir {input} Arbeiter.",
+      "solution": ["sind"]
+    },
+    {
+      "content": "Er {input} Lehrer.",
+      "solution": ["ist"]
+    },
+    {
+      "content": "Sie {input} Manager.",
+      "solution": ["sind", "ist"]
     }
   ]
 }
 
 
+###
+get http://localhost:4444/modules
+###
+get http://localhost:4444/exercises
+
+###
+
+put http://localhost:4444/exercises/6574a1258a71715508c69d2d/6574a1258a71715508c69d3d/update-field
+Content-Type: application/json
+
+# {
+#   "fieldToUpdate": "content",
+#   "updatedValue": "Das {{input}} ist schlecht."
+# }
 
 
 ###
-get http://localhost:4444/modules
-
+get http://localhost:4444/exercises/6574c2608ad53e5b6ac6786b

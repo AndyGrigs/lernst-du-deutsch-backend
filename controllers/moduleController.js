@@ -3,8 +3,6 @@ import Module from "../models/module.js";
 
 export const createModule = async (req, res) => {
   try {
-    console.log(req.body);
-
     const moduleData = new Module({
       name: req.body.name,
       moduleGrammar: req.body.moduleGrammar,
