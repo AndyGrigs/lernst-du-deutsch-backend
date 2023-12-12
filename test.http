@@ -2,53 +2,94 @@
 post http://localhost:4444/exercises
 Content-Type: application/json
 
-
 {
-  "number": "2.12",
-  "instruction": "Заповніть пропуски відповідною формою дієслова sein:",
+  "number": "2.14",
+  "instruction": "Перекладіть наступні питання на німецьку мову:",
   "tasks": [
     {
-      "content": "Wir {input} Sportler.",
-      "solution": ["sind"]
+      "content": "Ти дизайнер?",
+      "solution": ["Bist du Designer?"]
     },
     {
-      "content": "Sie {input} Lehrer.",
-      "solution": ["sind", "ist"]
+      "content": "Ти програміст?",
+      "solution": ["Bist du Programmierer?"]
     },
     {
-      "content": "Du {input} Designer.",
-      "solution": ["bist"]
+      "content": "Ти менеджер?",
+      "solution": ["Bist du Manager?"]
     },
     {
-      "content": "Ihr {input} Programmierer.",
-      "solution": ["seid"]
+      "content": "Ти робітник?",
+      "solution": ["Bist du Arbeiter?"]
     },
     {
-      "content": "Er {input} Manager.",
-      "solution": ["ist"]
+      "content": "Він спортсмен?",
+      "solution": ["Ist er Sportler?"]
     },
     {
-      "content": "Sie {input} Arbeiter.",
-      "solution": ["sind", "ist"]
+      "content": "Він вчитель?",
+      "solution": ["Ist er Lehrer?"]
     },
     {
-      "content": "Ihr {input} Sportler.",
-      "solution": ["seid"]
+      "content": "Він великий?",
+      "solution": ["Ist er groß?"]
     },
     {
-      "content": "Wir {input} Arbeiter.",
-      "solution": ["sind"]
+      "content": "Він новий?",
+      "solution": ["Ist er neu?"]
     },
     {
-      "content": "Er {input} Lehrer.",
-      "solution": ["ist"]
+      "content": "Ви дизайнери?",
+      "solution": ["Seid ihr Designer?"]
     },
     {
-      "content": "Sie {input} Manager.",
-      "solution": ["sind", "ist"]
+      "content": "Ви робітники?",
+      "solution": ["Seid ihr Arbeiter?"]
+    },
+    {
+      "content": "Ви спортсмени?",
+      "solution": ["Seid ihr Sportler?"]
+    },
+    {
+      "content": "Ви вчителі?",
+      "solution": ["Seid ihr Lehrer?"]
+    },
+    {
+      "content": "Ви програмісти?",
+      "solution": ["Seid ihr Programmierer?"]
+    },
+    {
+      "content": "Ви дизайнери?",
+      "solution": ["Seid ihr Designer?"]
+    },
+    {
+      "content": "Вони менеджери?",
+      "solution": ["Sind sie Manager?"]
+    },
+    {
+      "content": "Вони спортсмени?",
+      "solution": ["Sind sie Sportler?"]
+    },
+    {
+      "content": "Вони робітники?",
+      "solution": ["Sind sie Arbeiter?"]
+    },
+    {
+      "content": "Вони старі?",
+      "solution": ["Sind sie alt?"]
+    },
+    {
+      "content": "Цей поїзд новий?",
+      "solution": ["Ist dieser Zug neu?"]
+    },
+    {
+      "content": "Ця газета цікава?",
+      "solution": ["Ist diese Zeitung interessant?"]
     }
   ]
 }
+
+
 
 
 ###
