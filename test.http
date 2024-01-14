@@ -110,3 +110,23 @@ Content-Type: application/json
 
 ###
 get http://localhost:4444/exercises/6574c2608ad53e5b6ac6786b
+
+###
+post http://localhost:4444/auth/register
+Content-Type: application/json
+
+{
+  "email": "andygrigs88@gmail.com",
+  "password": "123123",
+  "fullName": "Andy Grigs"
+}
+###
+get http://localhost:4444/auth/login
+
+
+{
+  "email": "andygrigs88@gmail.com",
+  "password": "123123",
+  "fullName": "Andy Grigs"
+}
+
