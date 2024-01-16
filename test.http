@@ -120,13 +120,14 @@ Content-Type: application/json
   "password": "123123",
   "fullName": "Andy Grigs"
 }
-###
-get http://localhost:4444/auth/login
 
+
+###
+post http://localhost:4444/auth/login
+Content-Type: application/json
 
 {
   "email": "andygrigs88@gmail.com",
-  "password": "123123",
-  "fullName": "Andy Grigs"
+  "password": "123123"
 }
 

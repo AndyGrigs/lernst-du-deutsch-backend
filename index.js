@@ -43,21 +43,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// // Роут для створення нового модуля
 app.post("/modules", createModule);
-// Роут для отримання всіх модулів
 app.get("/modules", getModules);
-// Роут для отримання конкретного модуля за його ідентифікатором
 app.get("/modules/:moduleId", getOneModule);
-// Роут для оновлення модуля за його ідентифікатором
 app.put("/modules/:moduleId", updateOneModule);
-// Роут для видалення модуля за його ідентифікатором
 app.delete("/modules/:moduleId", deleteOneModule);
 
-// // New route for exercises related to a specific module
-// app.get("/modules/:moduleId/exercises", getExercisesByModule);
-
-// // Routes for exercises
 app.post("/exercises", createExercise);
 app.get("/exercises", getExercises);
 app.get("/exercises/:exerciseId", getOneExercise);
@@ -78,6 +69,5 @@ app.listen(4444, (err) => {
   if (err) {
     return console.log(err);
   }
-
   console.log("Server works");
 });
