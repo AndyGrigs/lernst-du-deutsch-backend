@@ -94,6 +94,15 @@ Content-Type: application/json
 
 ###
 get http://localhost:4444/modules
+
+###
+get http://localhost:4444/modules/656c33a76703257fb1ee14dd
+
+###
+get http://localhost:4444/modules/656c33a76703257fb1ee14dd/exercises
+
+
+
 ###
 get http://localhost:4444/exercises
 

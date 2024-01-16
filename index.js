@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import {
   createModule,
   deleteOneModule,
+  getModuleExercises,
   getModules,
   getOneModule,
   updateOneModule,
@@ -46,6 +47,7 @@ app.use(cors());
 app.post("/modules", createModule);
 app.get("/modules", getModules);
 app.get("/modules/:moduleId", getOneModule);
+app.get("/modules/:moduleId/exercises", getModuleExercises);
 app.put("/modules/:moduleId", updateOneModule);
 app.delete("/modules/:moduleId", deleteOneModule);
 
