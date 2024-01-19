@@ -44,12 +44,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.post("/modules", createModule);
+app.post("/add-module", createModule);
 app.get("/modules", getModules);
 app.get("/modules/:moduleId", getOneModule);
 app.get("/modules/:moduleId/exercises", getModuleExercises);
-app.put("/modules/:moduleId", updateOneModule);
-app.delete("/modules/:moduleId", deleteOneModule);
+app.put("/modules/edit/:moduleId", updateOneModule);
+app.delete("/modules/delete/:moduleId", deleteOneModule);
 
 app.post("/exercises", createExercise);
 app.get("/exercises", getExercises);
