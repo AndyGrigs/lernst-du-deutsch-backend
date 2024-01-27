@@ -5,19 +5,27 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email:{
-       type: String,
-       required: true,
-       unique: true 
+    email: {
+        type: String,
+        required: true,
+        unique: true
     },
     passwordHash: {
         type: String,
         required: true
     },
+    progress: {
+        type: Map,
+        of: new mongoose.Schema({
+            moduleId: String,
+            progress: Number,
+            completed: Boolean,
+        }, { _id: false })
+    },
     avatarUrl: String,
 },
-{
-    timestamps: true,
-});
+    {
+        timestamps: true,
+    });
 
 export default mongoose.model('User', UserSchema)

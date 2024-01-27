@@ -87,3 +87,12 @@ export const getMe = async (req, res) => {
     });
   }
 };
+
+export const getUserProgress = async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.userId)
+    res.json(user.progress)
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
