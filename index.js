@@ -26,7 +26,7 @@ import { registerValidation } from "./validations/auth.js";
 import { loginValidation } from "./validations/login.js";
 
 import checkAuth from "./utils/checkAuth.js";
-import { register, login, getMe, getUserProgress } from "./controllers/userController.js";
+import { register, login, getMe, getUserProgress, updateUserProgress } from "./controllers/userController.js";
 import handleValidationErrors from "./utils/handleValidationErrors.js";
 
 dotenv.config();
@@ -59,6 +59,7 @@ app.put("/exercises/:exerciseId/:taskId/update-field", updateExerciseField);
 app.delete("/exercises/:exerciseId", deleteOneExercise);
 
 app.get("/progress/:userId", getUserProgress)
+app.post("/progress/update/:userId", updateUserProgress)
 
 app.post("/auth/login", loginValidation, handleValidationErrors, login);
 app.post(
