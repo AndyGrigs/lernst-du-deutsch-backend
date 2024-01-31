@@ -61,6 +61,7 @@ app.delete("/exercises/:exerciseId", deleteOneExercise);
 app.get("/progress/:userId", getUserProgress)
 app.post("/progress/update/:userId", updateUserProgress)
 
+
 app.post("/auth/login", loginValidation, handleValidationErrors, login);
 app.post(
   "/auth/register",
