@@ -4,6 +4,11 @@ import UserModel from "../models/user.js";
 
 export const register = async (req, res) => {
   try {
+    const existingUser = await UserModel.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "E-Mail bereits registriert" });
+    }
+
     const password = req.body.password;
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
@@ -95,7 +100,7 @@ export const getUserProgress = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
+};
 
 export const updateUserProgress = async (req, res) => {
   try {
@@ -105,8 +110,8 @@ export const updateUserProgress = async (req, res) => {
     user.progress.set(moduleId, { moduleId, progress, completed });
     await user.save();
 
-    res.status(200).json({ message: 'Progress updated successfully' });
+    res.status(200).json({ message: "Progress updated successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
+};
