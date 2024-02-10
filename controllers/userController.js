@@ -4,7 +4,7 @@ import UserModel from "../models/user.js";
 
 export const register = async (req, res) => {
   try {
-    const existingUser = await UserModel.findOne({ email });
+    const existingUser = await UserModel.findOne({ email: req.body.email });
     if (existingUser) {
       return res.status(400).json({ message: "E-Mail bereits registriert" });
     }
@@ -17,6 +17,7 @@ export const register = async (req, res) => {
       email: req.body.email,
       passwordHash: hash,
       fullName: req.body.fullName,
+      progress: new Map(),
     });
     const user = await doc.save();
 

@@ -134,4 +134,12 @@ Content-Type: application/json
   "email": "andygrigs88@gmail.com",
   "password": "123123"
 }
+###
+post http://localhost:4444/progress/update/65c67d4265b19d7d5ff7c4d2
+Content-Type: application/json
 
+{
+  "moduleId": "656c33a76703257fb1ee14dd",
+  "progress":  50,
+  "completed": false
+}
