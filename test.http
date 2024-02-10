@@ -140,6 +140,7 @@ Content-Type: application/json
 
 {
   "moduleId": "656c33a76703257fb1ee14dd",
-  "progress":  50,
-  "completed": false
+  "exerciseId": "6574a1258a71715508c69d2d",
+  "exerciseProgress":  75,
+  "exerciseCompleted": true
 }

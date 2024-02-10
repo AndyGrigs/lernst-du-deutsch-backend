@@ -1,16 +1,6 @@
 import Exercise from "../models/exercise.js";
 import Module from "../models/module.js";
 
-// export const createExercise = async (req, res) => {
-//     try {
-//         const exerciseData = new Exercise(req.body);
-//         const result = await exerciseData.save();
-//         res.status(201).json(result);
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ error: "Internal Server Error" });
-//     }
-// };
 
 
 export const createExercise = async (req, res) => {

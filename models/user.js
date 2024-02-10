@@ -20,6 +20,11 @@ const UserSchema = new mongoose.Schema({
             moduleId: String,
             progress: Number,
             completed: Boolean,
+            exercises: [{
+                exerciseId: String,
+                progress: Number,
+                completed: Boolean,
+            }],
         }, { _id: false })
     },
     avatarUrl: String,
