@@ -144,3 +144,16 @@ Content-Type: application/json
   "exerciseProgress":  75,
   "exerciseCompleted": true
 }
+
+###
+post http://localhost:4444/update/exercise/65c67d4265b19d7d5ff7c4d2
+Content-Type: application/json
+
+{
+  "userId": "60d5ecb8b392d73f8c123abc",
+  "exercise": {
+    "exerciseId": "1111111111111111123",
+    "progress":  75,
+    "completed": false
+  }
+}

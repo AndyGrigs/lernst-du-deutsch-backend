@@ -95,7 +95,7 @@ export const getMe = async (req, res) => {
   }
 };
 
-export const getUserProgress = async (req, res) => {
+export const getUserModuleProgress = async (req, res) => {
   try {
     const user = await UserModel.findById(req.userId);
     res.json(user.progress);
@@ -104,19 +104,56 @@ export const getUserProgress = async (req, res) => {
   }
 };
 
-// export const updateUserProgress = async (req, res) => {
-//   try {
-//     const { moduleId, progress, completed } = req.body;
-//     const user = await UserModel.findById(req.params.userId);
+export const updateUserModuleProgress = async (req, res) => {
+  try {
+    const { moduleId, progress, completed } = req.body;
+    const user = await UserModel.findById(req.params.userId);
 
-//     user.progress.set(moduleId, { moduleId, progress, completed });
-//     await user.save();
+    user.progress.set(moduleId, { moduleId, progress, completed });
+    await user.save();
 
-//     res.status(200).json({ message: "Progress updated successfully" });
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
+    res.status(200).json({ message: "Progress updated successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const updateExerciseProgress = async (req, res) => {
+  try {
+    const { userId, exercise } = req.body;
+    const user = await UserModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    user.exerciseProgress.set(exercise.moduleId, {
+      moduleId: exercise.moduleId,
+      progress: exercise.progress,
+      completed: exercise.completed
+    });
+
+    await user.save();
+    res.status(200).json({ message: 'Exercise progress created successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getUserExerciseProgress = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = await UserModel.findById(userId).select('+exerciseProgress');
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(user.exerciseProgress);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 // export const updateUserProgress = async (req, res) => {
 //   try {
@@ -160,49 +197,49 @@ export const getUserProgress = async (req, res) => {
 // };
 
 
-export const updateUserProgress = async (req, res) => {
-  try {
-    const { moduleId, exerciseId, exerciseProgress, exerciseCompleted } = req.body;
-    const user = await UserModel.findById(req.params.userId);
+// export const updateUserProgress = async (req, res) => {
+//   try {
+//     const { moduleId, exerciseId, exerciseProgress, exerciseCompleted } = req.body;
+//     const user = await UserModel.findById(req.params.userId);
 
-    // Find the module and check if the exerciseId exists in the exercises array
-    const module = user.progress.get(moduleId);
-    if (!module || !module.exercises.includes(exerciseId)) {
-      return res.status(404).json({ message: "Module or exercise not found!" });
-    }
+//     // Find the module and check if the exerciseId exists in the exercises array
+//     const module = user.progress.get(moduleId);
+//     if (!module || !module.exercises.includes(exerciseId)) {
+//       return res.status(404).json({ message: "Module or exercise not found!" });
+//     }
 
-    // Fetch the exercise details from the "exercises" collection
-    const exercise = await ExerciseModel.findById(exerciseId);
-    if (!exercise) {
-      return res.status(404).json({ message: "Exercise not found!" });
-    }
+//     // Fetch the exercise details from the "exercises" collection
+//     const exercise = await ExerciseModel.findById(exerciseId);
+//     if (!exercise) {
+//       return res.status(404).json({ message: "Exercise not found!" });
+//     }
 
-    // Update the exercise with the new progress and completion status
-    exercise.progress = exerciseProgress;
-    exercise.completed = exerciseCompleted;
+//     // Update the exercise with the new progress and completion status
+//     exercise.progress = exerciseProgress;
+//     exercise.completed = exerciseCompleted;
 
-    // Save the updated exercise back to the database
-    await exercise.save();
+//     // Save the updated exercise back to the database
+//     await exercise.save();
 
-    // Update the user's progress map with the new exercise details
-    // Since the exercises are stored as IDs, you would typically not store the exercise details in the user's progress map
-    // Instead, you might store a reference to the exercise ID and fetch the details when needed
-    // For demonstration purposes, let's assume you want to store the exercise details in the user's progress map
-    const exerciseDetails = {
-      exerciseId: exercise._id,
-      progress: exerciseProgress,
-      completed: exerciseCompleted
-    };
-    module.exercises = module.exercises.map(id => id === exerciseId ? exerciseDetails : id);
+//     // Update the user's progress map with the new exercise details
+//     // Since the exercises are stored as IDs, you would typically not store the exercise details in the user's progress map
+//     // Instead, you might store a reference to the exercise ID and fetch the details when needed
+//     // For demonstration purposes, let's assume you want to store the exercise details in the user's progress map
+//     const exerciseDetails = {
+//       exerciseId: exercise._id,
+//       progress: exerciseProgress,
+//       completed: exerciseCompleted
+//     };
+//     module.exercises = module.exercises.map(id => id === exerciseId ? exerciseDetails : id);
 
-    // Mark the progress map as modified so that Mongoose knows to save the changes
-    user.markModified('progress');
+//     // Mark the progress map as modified so that Mongoose knows to save the changes
+//     user.markModified('progress');
 
-    // Save the updated user document
-    await user.save();
+//     // Save the updated user document
+//     await user.save();
 
-    res.status(200).json({ message: "Exercise progress updated successfully" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+//     res.status(200).json({ message: "Exercise progress updated successfully" });
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };

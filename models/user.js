@@ -14,19 +14,23 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    progress: {
+    moduleProgress: {
         type: Map,
         of: new mongoose.Schema({
             moduleId: String,
             progress: Number,
             completed: Boolean,
-            exercises: [{
-                exerciseId: String,
-                progress: Number,
-                completed: Boolean,
-            }],
         }, { _id: false })
     },
+    exerciseProgress: {
+        type: Map,
+        of: new mongoose.Schema({
+            exerciseId: String,
+            progress: Number,
+            completed: Boolean,
+        }, { _id: false })
+    },
+
     avatarUrl: String,
 },
     {
