@@ -27,11 +27,12 @@ import { loginValidation } from "./validations/login.js";
 
 import checkAuth from "./utils/checkAuth.js";
 import {
-  register, login, getMe,
-  getUserModuleProgress,
-  updateUserModuleProgress,
+  register,
+  login,
+  getMe,
   updateExerciseProgress,
-  getUserExerciseProgress
+  createExerciseProgress,
+  updateModuleProgress,
 } from "./controllers/userController.js";
 import handleValidationErrors from "./utils/handleValidationErrors.js";
 
@@ -64,14 +65,12 @@ app.put("/exercises/:exerciseId", updateOneExercise);
 app.put("/exercises/:exerciseId/:taskId/update-field", updateExerciseField);
 app.delete("/exercises/:exerciseId", deleteOneExercise);
 
-app.get("/progress/module/:userId", getUserModuleProgress)
-app.post("/progress/module/update/:userId", updateUserModuleProgress)
+//app.get("/progress/module/:userId", getUserModuleProgress);
+//app.post("/progress/module/update/:userId", updateUserModuleProgress);
 
-app.get("/progress/exercise/:userId", getUserExerciseProgress)
-app.post("/progress/update/exercise/:userId", updateExerciseProgress)
-
-
-
+//app.get("/progress/exercise/:userId", getUserExerciseProgress)
+app.post("/progress/create/:userId", createExerciseProgress);
+//app.patch("/progress/update/module/:userId", updateModuleProgress);
 
 app.post("/auth/login", loginValidation, handleValidationErrors, login);
 app.post(

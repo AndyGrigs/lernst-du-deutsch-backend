@@ -157,3 +157,17 @@ Content-Type: application/json
     "completed": false
   }
 }
+
+###
+
+post http://localhost:4444/progress/create/65ca3c59224df645ddd39a2b
+Content-Type: application/json
+
+
+  {
+    "exerciseId": "string_value_for_id",
+    "progress": 23,
+    "completed": "in_progress"
+  }
+ 
+
