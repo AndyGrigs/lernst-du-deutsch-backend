@@ -178,13 +178,36 @@ export const updateExerciseProgress = async (req, res) => {
   }
 };
 
-export const getUserExerciseProgress = async (req, res) => {
+export const getUserExerciseProgressByExerciseId = async (req, res) => {
   try {
-    const user = await UserModel.findById(req.userId);
-    res.json(user.exerciseProgress);
+    const userId = req.params.userId;
+    const exerciseId = req.params.exerciseId;
+
+    // Find the user by ID
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Find the progress object for the given exerciseId
+    const progressObject = user.exerciseProgress.find(
+      (progressObj) => progressObj.exerciseId === exerciseId
+    );
+
+    // If the progress object is not found, return an error
+    if (!progressObject) {
+      return res.status(404).json({ message: "Exercise progress not found" });
+    }
+
+    // Send the progress object as a response
+    res.status(200).json(progressObject);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Error in getUserExerciseProgressByExerciseId:", error);
+    res
+      .status(500)
+      .json({
+        message: "An error occurred while retrieving exercise progress",
+      });
   }
 };
-
 export const updateModuleProgress = async (req, res) => {};
