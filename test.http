@@ -165,9 +165,21 @@ Content-Type: application/json
 
 
   {
-    "exerciseId": "string_value_for_id",
-    "progress": 23,
-    "completed": "in_progress"
+    "exerciseId": "934111111111111111111111120",
+    "exrciseNumber": 1.1,
+    "progress": 1,
+    "completed": "not_started"
+  }
+ 
+###
+
+put http://localhost:4444/progress/update/65ca3c59224df645ddd39a2b
+Content-Type: application/json
+
+  {
+    "exerciseId": "934111111111111111111111120",
+    "progress": 10,
+    "completed":"completed"
   }
  
 

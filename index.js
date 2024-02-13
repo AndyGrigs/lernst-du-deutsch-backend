@@ -68,8 +68,8 @@ app.delete("/exercises/:exerciseId", deleteOneExercise);
 //app.get("/progress/module/:userId", getUserModuleProgress);
 //app.post("/progress/module/update/:userId", updateUserModuleProgress);
 
-//app.get("/progress/exercise/:userId", getUserExerciseProgress)
 app.post("/progress/create/:userId", createExerciseProgress);
+app.put("/progress/update/:userId", updateExerciseProgress);
 //app.patch("/progress/update/module/:userId", updateModuleProgress);
 
 app.post("/auth/login", loginValidation, handleValidationErrors, login);

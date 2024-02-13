@@ -40,7 +40,8 @@ const UserSchema = new mongoose.Schema(
     },
     exerciseProgress: [
       {
-        id: String,
+        exerciseId: { type: String, required: true },
+        exrciseNumber: { type: Number },
         progress: {
           type: Number,
           min: 0,

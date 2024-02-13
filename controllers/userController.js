@@ -182,23 +182,46 @@ export const createExerciseProgress = async (req, res) => {
 };
 */
 
+// export const createExerciseProgress = async (req, res) => {
+//   try {
+//     // Log the request body to verify the structure
+//     console.log("Request Body:", req.body);
+
+//     const { userId } = req.params;
+//     const { exerciseId, progress, completed } = req.body;
+
+//     // Find the user by ID
+//     const user = await UserModel.findById(userId);
+//     if (!user) {
+//       return res.status(404).send("User not found");
+//     }
+
+//     // Create a new progress object based on the schema
+//     const newProgress = {
+//       exerciseId,
+//       progress,
+//       completed,
+//     };
+//     console.log(user.exerciseProgress);
+//     // Send a success response
+//     res.status(200).send("success");
+//   } catch (error) {
+//     // Handle errors
+//     console.error("Error in createExerciseProgress:", error);
+//     res.status(500).send({
+//       message: "An error occurred while creating exercise progress",
+//       error,
+//     });
+//   }
+// };
+
 export const createExerciseProgress = async (req, res) => {
   try {
     // Log the request body to verify the structure
     console.log("Request Body:", req.body);
 
     const { userId } = req.params;
-    const { exerciseId, progress, completed } = req.body;
-
-    // Validate the input data
-    if (
-      typeof exerciseId === "undefined" ||
-      typeof progress === "undefined" ||
-      typeof completed === "undefined"
-    ) {
-      console.log("Validation failed:", { exerciseId, progress, completed });
-      return res.status(400).send("Missing required fields");
-    }
+    const { exerciseId, exrciseNumber, progress, completed } = req.body;
 
     // Find the user by ID
     const user = await UserModel.findById(userId);
@@ -209,12 +232,22 @@ export const createExerciseProgress = async (req, res) => {
     // Create a new progress object based on the schema
     const newProgress = {
       exerciseId,
+      exrciseNumber,
       progress,
       completed,
     };
-    console.log(user.exerciseProgress);
-    // Send a success response
-    res.status(200).send("success");
+
+    // Use the $push operator to append the new progress object to the user's exerciseProgress array
+    await UserModel.updateOne(
+      { _id: userId },
+      { $push: { exerciseProgress: newProgress } }
+    );
+    const updatedUser = await UserModel.findById(userId);
+
+    // Send the updated user object as a response
+    res.status(200).json(updatedUser);
+    // // Send a success response
+    // res.status(200).send("success");
   } catch (error) {
     // Handle errors
     console.error("Error in createExerciseProgress:", error);
@@ -224,46 +257,47 @@ export const createExerciseProgress = async (req, res) => {
     });
   }
 };
+
 export const updateExerciseProgress = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const { exerciseId, newProgress } = req.body;
+    const { exerciseId, progress, completed } = req.body;
 
+    // Find the user by ID
     const user = await UserModel.findById(userId);
     if (!user) {
-      console.log(`User with ID ${userId} not found.`);
-      return res.status(404).send("Benutzer nicht gefunden");
+      return res.status(404).send("User not found");
     }
 
-    console.log(`Received exerciseId: ${exerciseId}`);
-    console.log(
-      `Current exerciseProgress keys: ${Array.from(
-        user.exerciseProgress.keys()
-      )}`
+    // Locate the progress object for the given exerciseId
+    const progressIndex = user.exerciseProgress.findIndex(
+      (progressObj) => progressObj.exerciseId === exerciseId
     );
 
-    let exerciseProgress = user.exerciseProgress.get(exerciseId);
-    if (!exerciseProgress) {
-      console.log(
-        `Exercise with ID ${exerciseId} not found in user's exerciseProgress. Creating a new entry.`
-      );
-      exerciseProgress = {
-        exerciseId: exerciseId,
-        progress: 0,
-        completed: "not_started",
-      };
-      user.exerciseProgress.set(exerciseId, exerciseProgress);
+    // If the progress object is not found, return an error
+    if (progressIndex === -1) {
+      return res.status(404).send("Exercise progress not found");
     }
 
-    exerciseProgress.progress = newProgress;
-    exerciseProgress.completed =
-      newProgress >= 100 ? "completed" : "in_progress";
+    // Update the progress and completed fields
+    user.exerciseProgress[progressIndex].progress = progress;
+    user.exerciseProgress[progressIndex].completed = completed;
 
+    // Save the updated user document
     await user.save();
-    return res.status(200).send("Übungsfortschritt erflgreich aktualisiert.");
+
+    // Retrieve the updated user document
+    const updatedUser = await UserModel.findById(userId);
+
+    // Send the updated user object as a response
+    res.status(200).json(updatedUser);
   } catch (error) {
-    console.error("Fehler beim Aktualisieren des Übungsfortschritts:", error);
-    return res.status(500).send("Interner Serverfehler");
+    // Handle errors
+    console.error("Error in updateExerciseProgress:", error);
+    res.status(500).send({
+      message: "An error occurred while updating exercise progress",
+      error,
+    });
   }
 };
 // Funktion zum Aktualisieren des Modulfortschritts
