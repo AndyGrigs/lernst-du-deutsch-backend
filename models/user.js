@@ -34,14 +34,27 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
 
-    moduleProgress: {
-      type: Map,
-      of: ProgressSchema,
-    },
+    moduleProgress: [
+      {
+        moduleId: { type: String, required: true },
+        moduleNumber: { type: Number },
+        progress: {
+          type: Number,
+          min: 0,
+          max: 100,
+          default: 0,
+        },
+        completed: {
+          type: String,
+          enum: ["in_progress", "completed", "not_started"],
+          default: "not_started",
+        },
+      },
+    ],
     exerciseProgress: [
       {
         exerciseId: { type: String, required: true },
-        exrciseNumber: { type: Number },
+        exerciseNumber: { type: Number },
         progress: {
           type: Number,
           min: 0,

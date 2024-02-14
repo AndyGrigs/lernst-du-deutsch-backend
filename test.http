@@ -166,8 +166,20 @@ Content-Type: application/json
 
   {
     "exerciseId": "930",
-    "exrciseNumber": 1.2,
+    "exerciseNumber": 1.2,
     "progress": 1,
+    "completed": "not_started"
+  }
+###
+
+post http://localhost:4444/progress/module/create/65ca3c59224df645ddd39a2b
+Content-Type: application/json
+
+
+  {
+    "moduleId": "120938120",
+    "moduleNumber": 1,
+    "progress": 17,
     "completed": "not_started"
   }
  
@@ -186,6 +198,15 @@ Content-Type: application/json
 
 get http://localhost:4444/progress/exercise/65ca3c59224df645ddd39a2b/9345102394820
 
+###
 
+put http://localhost:4444/progress/module/update/65ca3c59224df645ddd39a2b
+Content-Type: application/json
+
+  {
+    "moduleId": "120938120",
+    "progress": 99,
+    "completed":"in_progress"
+  }
  
 

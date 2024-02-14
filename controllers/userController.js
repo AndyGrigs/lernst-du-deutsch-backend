@@ -109,7 +109,7 @@ export const createExerciseProgress = async (req, res) => {
     // Create a new progress object based on the schema
     const newProgress = {
       exerciseId,
-      exrciseNumber,
+      exerciseNumber,
       progress,
       completed,
     };
@@ -183,31 +183,91 @@ export const getUserExerciseProgressByExerciseId = async (req, res) => {
     const userId = req.params.userId;
     const exerciseId = req.params.exerciseId;
 
-    // Find the user by ID
     const user = await UserModel.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Find the progress object for the given exerciseId
     const progressObject = user.exerciseProgress.find(
       (progressObj) => progressObj.exerciseId === exerciseId
     );
 
-    // If the progress object is not found, return an error
     if (!progressObject) {
       return res.status(404).json({ message: "Exercise progress not found" });
     }
 
-    // Send the progress object as a response
     res.status(200).json(progressObject);
   } catch (error) {
-    console.error("Error in getUserExerciseProgressByExerciseId:", error);
-    res
-      .status(500)
-      .json({
-        message: "An error occurred while retrieving exercise progress",
-      });
+    console.error("Error in getUserExerciseProgress", error);
+    res.status(500).json({
+      message: "An error occurred while retrieving exercise progress",
+    });
   }
 };
-export const updateModuleProgress = async (req, res) => {};
+
+export const createModuleProgress = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { moduleId, moduleNumber, progress, completed } = req.body;
+
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    const newProgress = {
+      moduleId,
+      moduleNumber,
+      progress,
+      completed,
+    };
+
+    await UserModel.updateOne(
+      { _id: userId },
+      { $push: { moduleProgress: newProgress } }
+    );
+    const updatedUser = await UserModel.findById(userId);
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error("Error in createModuleProgress:", error);
+    res.status(500).send({
+      message: "An error occurred while creating module progress",
+      error,
+    });
+  }
+};
+
+export const updateModuleProgress = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const { moduleId, progress, completed } = req.body;
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    const progressIndex = user.moduleProgress.findIndex(
+      (progressObj) => progressObj.moduleId === moduleId
+    );
+
+    if (progressIndex === -1) {
+      return res.status(404).send("Exercise progress not found");
+    }
+
+    user.moduleProgress[progressIndex].progress = progress;
+    user.moduleProgress[progressIndex].completed = completed;
+
+    await user.save();
+
+    const updatedUser = await UserModel.findById(userId);
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error("Error in updateExerciseProgress:", error);
+    res.status(500).send({
+      message: "An error occurred while updating exercise progress",
+      error,
+    });
+  }
+};
