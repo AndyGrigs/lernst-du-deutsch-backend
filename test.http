@@ -189,7 +189,7 @@ put http://localhost:4444/progress/exercise/update/65ca3c59224df645ddd39a2b
 Content-Type: application/json
 
   {
-    "exerciseId": "934111111111111111111111120",
+    "exerciseId":"11111120",
     "progress": 45,
     "completed":"completed"
   }
