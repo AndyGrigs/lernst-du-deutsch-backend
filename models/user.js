@@ -1,22 +1,18 @@
 import mongoose from "mongoose";
 
-const ProgressSchema = new mongoose.Schema(
-  {
-    id: String,
-    progress: {
-      type: Number,
-      min: 0,
-      max: 100,
-      default: 0,
-    },
-    completed: {
-      type: String,
-      enum: ["in_progress", "completed", "not_started"],
-      default: "not_started",
-    },
+const ProgressSchema = new mongoose.Schema({
+  id: String,
+  progress: {
+    type: Number,
+    min: 0,
+    max: 100,
+    default: 0,
   },
-  { _id: false }
-);
+  completed: {
+    type: Boolean,
+    default: false,
+  },
+});
 
 const UserSchema = new mongoose.Schema(
   {
@@ -45,9 +41,8 @@ const UserSchema = new mongoose.Schema(
           default: 0,
         },
         completed: {
-          type: String,
-          enum: ["in_progress", "completed", "not_started"],
-          default: "not_started",
+          type: Boolean,
+          default: false,
         },
       },
     ],
@@ -55,6 +50,7 @@ const UserSchema = new mongoose.Schema(
       {
         exerciseId: { type: String, required: true },
         exerciseNumber: { type: Number },
+        exerciseAnswers: { type: Object },
         progress: {
           type: Number,
           min: 0,
@@ -62,9 +58,8 @@ const UserSchema = new mongoose.Schema(
           default: 0,
         },
         completed: {
-          type: String,
-          enum: ["in_progress", "completed", "not_started"],
-          default: "not_started",
+          type: Boolean,
+          default: false,
         },
       },
     ],
