@@ -160,16 +160,21 @@ Content-Type: application/json
 
 ###
 
-post http://localhost:4444/progress/exercise/create/65ca3c59224df645ddd39a2b
+post http://localhost:4444/progress/exercise/create/65d751b1edc0e6d910b1e8e6
 Content-Type: application/json
 
 
-  {
-    "exerciseId": "930",
-    "exerciseNumber": 1.2,
-    "progress": 1,
-    "completed": "not_started"
-  }
+{
+  "exerciseId": "123",
+  "exerciseNumber":  1,
+  "exerciseAnswers": {
+    "question1": "true",
+    "question2": "false"
+  },
+  "progress":  50,
+  "completed": false
+}
+
 ###
 
 post http://localhost:4444/progress/module/create/65ca3c59224df645ddd39a2b

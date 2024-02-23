@@ -50,7 +50,11 @@ const UserSchema = new mongoose.Schema(
       {
         exerciseId: { type: String, required: true },
         exerciseNumber: { type: Number },
-        exerciseAnswers: { type: Object },
+        exerciseAnswers: {
+          type: Map,
+          of: String,
+          default: {},
+        },
         progress: {
           type: Number,
           min: 0,

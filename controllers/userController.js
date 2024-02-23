@@ -98,7 +98,8 @@ export const getMe = async (req, res) => {
 export const createExerciseProgress = async (req, res) => {
   try {
     const { userId } = req.params;
-    const { exerciseId, exrciseNumber, progress, completed } = req.body;
+    const { exerciseId, exerciseNumber, exerciseAnswers, progress, completed } =
+      req.body;
 
     // Find the user by ID
     const user = await UserModel.findById(userId);
@@ -110,6 +111,7 @@ export const createExerciseProgress = async (req, res) => {
     const newProgress = {
       exerciseId,
       exerciseNumber,
+      exerciseAnswers,
       progress,
       completed,
     };
