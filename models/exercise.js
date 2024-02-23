@@ -13,7 +13,7 @@ const taskSchema = new mongoose.Schema(
 const exerciseSchema = new mongoose.Schema({
   number: Number,
   instruction: String,
-  example: String,
+  example: { type: String, default: "" },
   tasks: [taskSchema],
 });
 
