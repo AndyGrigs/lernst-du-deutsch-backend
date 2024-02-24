@@ -116,6 +116,9 @@ Content-Type: application/json
 get http://localhost:4444/exercises/6574c2608ad53e5b6ac6786b
 
 ###
+get http://localhost:4444/exercises/6574da685b14c03f7112154f
+
+###
 post http://localhost:4444/auth/register
 Content-Type: application/json
 
