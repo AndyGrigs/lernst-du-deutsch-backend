@@ -31,9 +31,7 @@ import {
   login,
   getMe,
   updateExerciseProgress,
-  createExerciseProgress,
   getUserExerciseProgressByExerciseId,
-  createModuleProgress,
   updateModuleProgress,
 } from "./controllers/userController.js";
 import handleValidationErrors from "./utils/handleValidationErrors.js";
@@ -70,13 +68,13 @@ app.delete("/exercises/:exerciseId", deleteOneExercise);
 //app.get("/progress/module/:userId", getUserModuleProgress);
 //app.post("/progress/module/update/:userId", updateUserModuleProgress);
 
-app.post("/progress/exercise/create/:userId", createExerciseProgress);
+//app.post("/progress/exercise/create/:userId", createExerciseProgress);
 app.put("/progress/exercise/update/:userId", updateExerciseProgress);
 app.get(
   "/progress/exercise/:userId/:exerciseId",
   getUserExerciseProgressByExerciseId
 );
-app.post("/progress/module/create/:userId", createModuleProgress);
+//app.post("/progress/module/create/:userId", createModuleProgress);
 app.put("/progress/module/update/:userId", updateModuleProgress);
 
 app.post("/auth/login", loginValidation, handleValidationErrors, login);

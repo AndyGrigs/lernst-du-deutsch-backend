@@ -95,48 +95,6 @@ export const getMe = async (req, res) => {
   }
 };
 
-export const createExerciseProgress = async (req, res) => {
-  try {
-    const { userId } = req.params;
-    const { exerciseId, exerciseNumber, exerciseAnswers, progress, completed } =
-      req.body;
-
-    // Find the user by ID
-    const user = await UserModel.findById(userId);
-    if (!user) {
-      return res.status(404).send("User not found");
-    }
-
-    // Create a new progress object based on the schema
-    const newProgress = {
-      exerciseId,
-      exerciseNumber,
-      exerciseAnswers,
-      progress,
-      completed,
-    };
-
-    // Use the $push operator to append the new progress object to the user's exerciseProgress array
-    await UserModel.updateOne(
-      { _id: userId },
-      { $push: { exerciseProgress: newProgress } }
-    );
-    const updatedUser = await UserModel.findById(userId);
-
-    // Send the updated user object as a response
-    res.status(200).json(updatedUser);
-    // // Send a success response
-    // res.status(200).send("success");
-  } catch (error) {
-    // Handle errors
-    console.error("Error in createExerciseProgress:", error);
-    res.status(500).send({
-      message: "An error occurred while creating exercise progress",
-      error,
-    });
-  }
-};
-
 export const updateExerciseProgress = async (req, res) => {
   try {
     const userId = req.params.userId;
@@ -203,39 +161,6 @@ export const getUserExerciseProgressByExerciseId = async (req, res) => {
     console.error("Error in getUserExerciseProgress", error);
     res.status(500).json({
       message: "An error occurred while retrieving exercise progress",
-    });
-  }
-};
-
-export const createModuleProgress = async (req, res) => {
-  try {
-    const { userId } = req.params;
-    const { moduleId, moduleNumber, progress, completed } = req.body;
-
-    const user = await UserModel.findById(userId);
-    if (!user) {
-      return res.status(404).send("User not found");
-    }
-
-    const newProgress = {
-      moduleId,
-      moduleNumber,
-      progress,
-      completed,
-    };
-
-    await UserModel.updateOne(
-      { _id: userId },
-      { $push: { moduleProgress: newProgress } }
-    );
-    const updatedUser = await UserModel.findById(userId);
-
-    res.status(200).json(updatedUser);
-  } catch (error) {
-    console.error("Error in createModuleProgress:", error);
-    res.status(500).send({
-      message: "An error occurred while creating module progress",
-      error,
     });
   }
 };

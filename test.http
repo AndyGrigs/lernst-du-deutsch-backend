@@ -166,7 +166,7 @@ Content-Type: application/json
 post http://localhost:4444/progress/exercise/create/65d751b1edc0e6d910b1e8e6
 Content-Type: application/json
 
-
+ 
 {
   "exerciseId": "123",
   "exerciseNumber":  1,
@@ -193,11 +193,11 @@ Content-Type: application/json
  
 ###
 
-put http://localhost:4444/progress/exercise/update/65ca3c59224df645ddd39a2b
+put http://localhost:4444/progress/exercise/update/65d751b1edc0e6d910b1e8e6
 Content-Type: application/json
 
   {
-    "exerciseId":"11111120",
+    "exerciseId":"123",
     "progress": 45,
     "completed":"completed"
   }

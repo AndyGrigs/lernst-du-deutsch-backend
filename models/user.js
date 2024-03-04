@@ -1,19 +1,5 @@
 import mongoose from "mongoose";
 
-const ProgressSchema = new mongoose.Schema({
-  id: String,
-  progress: {
-    type: Number,
-    min: 0,
-    max: 100,
-    default: 0,
-  },
-  completed: {
-    type: Boolean,
-    default: false,
-  },
-});
-
 const UserSchema = new mongoose.Schema(
   {
     fullName: {
@@ -52,7 +38,7 @@ const UserSchema = new mongoose.Schema(
         exerciseNumber: { type: Number },
         exerciseAnswers: {
           type: Map,
-          of: String,
+          of: Boolean,
           default: {},
         },
         progress: {
