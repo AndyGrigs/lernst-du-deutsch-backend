@@ -23,21 +23,21 @@ import {
 } from "./controllers/exerciseController.js";
 
 import {
-  getUserExerciseProgress,
-  updateExerciseProgress,
   createExerciseProgress,
+  getUserExerciseProgress,
+  getAllExerciseProgress,
+  updateExerciseProgress,
+  createModuleProgress,
+  getUserModuleProgress,
+  getAllModuleProgress,
+  updateModuleProgress,
 } from "./controllers/progressController.js";
 
 import { registerValidation } from "./validations/auth.js";
 import { loginValidation } from "./validations/login.js";
 
 import checkAuth from "./utils/checkAuth.js";
-import {
-  register,
-  login,
-  getMe,
-  updateModuleProgress,
-} from "./controllers/userController.js";
+import { register, login, getMe } from "./controllers/userController.js";
 import handleValidationErrors from "./utils/handleValidationErrors.js";
 
 dotenv.config();
@@ -69,15 +69,15 @@ app.put("/exercises/:exerciseId", updateOneExercise);
 app.put("/exercises/:exerciseId/:taskId/update-field", updateExerciseField);
 app.delete("/exercises/:exerciseId", deleteOneExercise);
 
-//app.get("/progress/module/:userId", getUserModuleProgress);
-//app.post("/progress/module/update/:userId", updateUserModuleProgress);
+app.post("/progress/module/create/:userId", createModuleProgress);
 app.put("/progress/module/update/:userId", updateModuleProgress);
+app.get("/progress/module/:userId/:exerciseId", getUserModuleProgress);
+app.get("/progress/module/:userId", getAllModuleProgress);
 
 app.post("/progress/exercise/create/:userId", createExerciseProgress);
 app.put("/progress/exercise/update/:userId", updateExerciseProgress);
 app.get("/progress/exercise/:userId/:exerciseId", getUserExerciseProgress);
-
-//app.post("/progress/module/create/:userId", createModuleProgress);
+app.get("/progress/exercise/:userId", getAllExerciseProgress);
 
 app.post("/auth/login", loginValidation, handleValidationErrors, login);
 app.post(

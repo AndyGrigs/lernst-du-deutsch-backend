@@ -163,16 +163,15 @@ Content-Type: application/json
 
 
 ###
-
 post http://localhost:4444/progress/module/create/65ca3c59224df645ddd39a2b
 Content-Type: application/json
 
 
   {
-    "moduleId": "120938120",
-    "moduleNumber": 1,
-    "progress": 17,
-    "completed": "true"
+    "moduleId": "1",
+    "moduleNumber": 0,
+    "progress": 0,
+    "completed": "false"
   }
  
 
@@ -193,26 +192,33 @@ Content-Type: application/json
 
 get http://localhost:4444/progress/exercise/65ca3c59224df645ddd39a2b/9345102394820
 
+###
+get  http://localhost:4444/progress/exercise/65ca3c59224df645ddd39a2b
 
 ###
 
 put http://localhost:4444/progress/exercise/update/65ca3c59224df645ddd39a2b
 Content-Type: application/json
 
- {
-  "exerciseId": "2",
-  "progress":  13,
-  "completed": false
+{
+ "exerciseId": "2",
+ "exerciseAnswers": {
+    "1": true,
+    "2": false,
+    "3": false
+ },
+ "progress": 13,
+ "completed": false
 }
   
 
 
 ###
 post http://localhost:4444/progress/exercise/create/65ca3c59224df645ddd39a2b
-Content-Type: application/application/json
+Content-Type: application/json
 
 {
-  "exerciseId": "1",
+  "exerciseId": "-",
   "exerciseNumber": 1 ,
   "exerciseAnswers": {
   },
