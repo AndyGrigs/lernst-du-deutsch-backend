@@ -134,32 +134,11 @@ post http://localhost:4444/auth/login
 Content-Type: application/json
 
 {
-  "email": "andygrigs88@gmail.com",
+  "email": "andygri88@gmail.com",
   "password": "123123"
 }
-###
-post http://localhost:4444/progress/update/65c67d4265b19d7d5ff7c4d2
-Content-Type: application/json
 
-{
-  "moduleId": "656c33a76703257fb1ee14dd",
-  "exerciseId": "6574a1258a71715508c69d2d",
-  "exerciseProgress":  75,
-  "exerciseCompleted": true
-}
 
-###
-post http://localhost:4444/update/exercise/65c67d4265b19d7d5ff7c4d2
-Content-Type: application/json
-
-{
-  "userId": "60d5ecb8b392d73f8c123abc",
-  "exercise": {
-    "exerciseId": "1111111111111111123",
-    "progress":  75,
-    "completed": false
-  }
-}
 
 
 ###
@@ -174,22 +153,27 @@ Content-Type: application/json
     "completed": "false"
   }
  
-
- 
-
 ###
 
-put http://localhost:4444/progress/module/update/65ca3c59224df645ddd39a2b
+put http://localhost:4444/progress/module/update/65e8cd814376191313a87600
 Content-Type: application/json
 
   {
-    "moduleId": "120938120123",
+    "moduleId": "2",
     "progress": 99,
     "completed":"true"
   }
  
-### 
+###
+ get http://localhost:4444/progress/module/65ca3c59224df645ddd39a2b
 
+###
+get  http://localhost:4444/progress/module/65e8cd814376191313a87600/2
+
+
+
+#EXERCISE PROGRES ROUTS
+###
 get http://localhost:4444/progress/exercise/65ca3c59224df645ddd39a2b/9345102394820
 
 ###

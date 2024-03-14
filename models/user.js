@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema(
 
     moduleProgress: [
       {
+        _id: false,
         moduleId: { type: String },
         moduleNumber: { type: Number },
         progress: {
@@ -34,6 +35,7 @@ const UserSchema = new mongoose.Schema(
     ],
     exerciseProgress: [
       {
+        _id: false,
         exerciseId: { type: String },
         exerciseNumber: { type: Number },
         exerciseAnswers: {
