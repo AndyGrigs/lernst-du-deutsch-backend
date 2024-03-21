@@ -3,9 +3,15 @@ import UserModel from "../models/user.js";
 export const createExerciseProgress = async (req, res) => {
   try {
     // Extract data from the request body
-    const { exerciseId, exerciseNumber, exerciseAnswers, progress, completed } =
-      req.body;
-    const userId = req.params.userId; // Assuming userId is correctly extracted from the URL parameters
+    const {
+      exerciseId,
+      exerciseNumber,
+      moduleName,
+      exerciseAnswers,
+      progress,
+      completed,
+    } = req.body;
+    const userId = req.params.userId;
     console.log(exerciseId);
     if (!exerciseId || !exerciseNumber || !progress) {
       return res.status(400).json({ message: "Missing required fields" });
@@ -19,6 +25,7 @@ export const createExerciseProgress = async (req, res) => {
 
     const exerciseProgress = {
       exerciseId,
+      moduleName,
       exerciseNumber,
       exerciseAnswers,
       progress,
